@@ -38,15 +38,21 @@
         <audio id="bellSound" src="Assets/Bell.mp3"></audio>
     </div>
 
+    <div id="timer">00:00:00</div>
+    <audio id="tickSound" src="tick.mp3"></audio>
+    <audio id="bellSound" src="ring.mp3"></audio>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const timerElement = document.getElementById('timer');
             const tickSound = document.getElementById('tickSound');
             const bellSound = document.getElementById('bellSound');
 
+            let timerInterval;
+
             function countdown() {
                 const now = new Date();
-                const targetHour = 6; // 9 PM
+                const targetHour = 21; // 9 PM
                 const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, 0, 0, 0);
 
                 if (now > targetTime) {
@@ -59,6 +65,7 @@
                     clearInterval(timerInterval);
                     timerElement.textContent = "00:00:00";
                     bellSound.play();
+                    bellSound.loop = true; // Play 'ring.mp3' on loop
                 } else {
                     const hours = Math.floor(diff / 3600000);
                     const mins = Math.floor((diff % 3600000) / 60000);
@@ -72,7 +79,7 @@
                 return time < 10 ? '0' + time : time;
             }
 
-            const timerInterval = setInterval(countdown, 1000);
+            timerInterval = setInterval(countdown, 1000);
             countdown(); // Run immediately on load
         });
     </script>
