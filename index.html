@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WT DOOM</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 48px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #202020;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="title">mad frog's DOX AWAITS!!!</div>
+        <div class="timer" id="timer"></div>
+        <audio id="tickSound" src="Assets/Tick.mp3"></audio>
+        <audio id="bellSound" src="Assets/Bell.mp3"></audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timerElement = document.getElementById('timer');
+            const tickSound = document.getElementById('tickSound');
+            const bellSound = document.getElementById('bellSound');
+
+            function countdown() {
+                const now = new Date();
+                const targetHour = 6; // 9 PM
+                const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, 0, 0, 0);
+
+                if (now > targetTime) {
+                    targetTime.setDate(targetTime.getDate() + 1);
+                }
+
+                const diff = targetTime - now;
+
+                if (diff <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = "00:00:00";
+                    bellSound.play();
+                } else {
+                    const hours = Math.floor(diff / 3600000);
+                    const mins = Math.floor((diff % 3600000) / 60000);
+                    const secs = Math.floor((diff % 60000) / 1000);
+                    timerElement.textContent = `${padTime(hours)}:${padTime(mins)}:${padTime(secs)}`;
+                    tickSound.play();
+                }
+            }
+
+            function padTime(time) {
+                return time < 10 ? '0' + time : time;
+            }
+
+            const timerInterval = setInterval(countdown, 1000);
+            countdown(); // Run immediately on load
+        });
+    </script>
+    <p></p>
+    <p></p>
+    <p></p>
+    <div class="title">Already doxxed indivuadals will show up here:</div>
+</body>
+</html>
+
+<style>
+    .clickable-box{width:300px;height:300px;border:2px solid #333;overflow:hidden;position:relative;font-family:Arial,sans-serif;}
+    .clickable-box a{display:block;width:100%;height:100%;text-decoration:none;color:black;}
+    .clickable-box img{width:100%;height:60%;object-fit:cover;}
+    .content{padding:10px;background-color:rgba(255,255,255,0.8);position:absolute;bottom:0;width:100%;}
+    .title{font-size:18px;font-weight:bold;}
+    .description{font-size:14px;opacity:0.8;}
+</style>
+
+<p></p>
+</head>
+<body>
+    <div class="clickable-box">
+        <a href="/Pastes/Jess.txt">
+            <img src="Assets/Jess.png">
+            <div class="content">
+                <div class="title">Jess</div>
+                <div class="description">Stupid evil Welsh fascist that runs this entire fucking group!</div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
+
+<p></p>
+</head>
+<body>
+    <div class="clickable-box">
+        <a href="/Pastes/">
+            <img src="Assets/Test.png">
+            <div class="content">
+                <div class="title">...</div>
+                <div class="description">...............</div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
