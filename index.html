@@ -53,7 +53,7 @@
             function countdown() {
                 const now = new Date();
                 const targetHour = 21; // 9 PM
-                const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, 0, 0, 0);
+                const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour,0, 0);
 
                 if (now > targetTime) {
                     targetTime.setDate(targetTime.getDate() + 1);
